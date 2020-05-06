@@ -1,5 +1,4 @@
 import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 import java.util.SortedMap;
 
@@ -121,8 +120,8 @@ public class MyBank {
                     }
                     boolean loggedin = true;
                     while (loggedin) {
-                        System.out.println("wlecome \"" + acc + "\"");
-                        System.out.println("press 1 to deposite ,2 to withdraw,3 to logout");
+                        System.out.println("welcome \"" + acc + "\"");
+                        System.out.println("press 1 to deposit ,2 to withdraw,3 to logout");
                         int j = sc.nextInt();
                         double amount;
                         switch (j) {
