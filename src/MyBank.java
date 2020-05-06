@@ -109,8 +109,10 @@ public class MyBank {
                     if (cc == 0) {
                         System.out.println("Enter Your Account");
                         acc = sc.nextInt();
+
                     } else {
                         acc = accindex - 1;
+                        cc = 0;
                     }
 
                     if (acc >= accindex) {
