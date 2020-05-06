@@ -1,27 +1,29 @@
-public class Timer {
+public class Producer {
     public static void main(String[] args) {
-        System.out.println("Welcome to 1000 sec timer");
-        ClockWork c=new ClockWork("TimerThread");
+
     }
 }
 
-class ClockWork implements Runnable {
+class Farmer implements Runnable {
     Thread t;
-
-    ClockWork(String name) {
-        t = new Thread(this, name);
+    Fruits f;
+    Farmer(Fruits f){
+        this.f=f;
+        t=new Thread(this);
         t.start();
     }
 
     @Override
     public void run() {
         for (int i = 1; i < 1000; i++) {
-            System.out.println("Time left :" + (1000 - i)+" sec");
             try {
+                f.putApple();
                 t.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
+
     }
 }
