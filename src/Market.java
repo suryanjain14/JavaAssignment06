@@ -2,6 +2,7 @@ public class Market {
     public static void main(String[] args) {
         Fruits f=new Fruits();
         Farmer p=new Farmer(f);
+        Seller c=new Seller(f);
     }
 }
 class Fruits{
@@ -12,13 +13,24 @@ class Fruits{
             try {
                 System.out.println("apples finished waiting for farmer");
                 wait();
+                notify();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        if(apple==10){
 
-        System.out.println("sold 1 apple from"+apple);
-        apple--;
+            System.out.println("sold 1 apple from"+apple);
+            apple--;
+            notify();
+        }
+        else {
+
+            System.out.println("sold 1 apple from"+apple);
+            apple--;
+
+        }
+
         System.out.println("apples left" +apple);
         return apple;
     }
@@ -72,15 +84,24 @@ class Fruits{
             try {
                 System.out.println("capacity full");
                 wait();
+                notify();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         if(apple==0){
+
+            System.out.println("added 1 apple total:"+apple);
+            apple++;
             notify();
         }
-        System.out.println("added 1 apple total:"+apple);
-        apple++;
+        else {
+            System.out.println("added 1 apple total:"+apple);
+            apple++;
+
+        }
+
+
     }
 //    synchronized public void putGrape(){
 //        while (Grape==capacity){
@@ -98,10 +119,56 @@ class Fruits{
 
 }
 
-class Seller implements Runnable {
+class Farmer implements Runnable {
+    Thread t;
+    Fruits f;
+    Farmer(Fruits f){
+        this.f=f;
+        t=new Thread(this);
+        t.start();
+    }
 
     @Override
     public void run() {
+        for (int i = 1; i < 10; i++) {
+            if(i==9){
+                System.out.println("production halted\n Good Bye");
+                System.exit(1);
+            }
+            try {
+                f.putApple();
+                t.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+}
+
+
+class Seller implements Runnable {
+
+    Thread t;
+    Fruits f;
+    Seller(Fruits f){
+        this.f=f;
+        t=new Thread(this);
+        t.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i < 1000; i++) {
+            try {
+                f.getApple();
+                t.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
 
     }
 }
