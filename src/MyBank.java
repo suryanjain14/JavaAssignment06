@@ -90,10 +90,15 @@ public class MyBank {
                 case 1: {
                     if (accindex < 4) {
                         ac[accindex] = new Account();
-                        System.out.println("Your Acc no is " + accindex + "Remember it");
+                        System.out.println("Your Acc no is \"" + accindex + "\" Remember it");
                         accindex++;
                         System.out.println("processing Automatic login request");
                         cc = 1;
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         System.out.println("Sorry you cannot open a  account");
                     }
@@ -129,6 +134,7 @@ public class MyBank {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+                                break;
 
                             }
                             case 2: {
